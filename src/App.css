@@ -1,11 +1,11 @@
-.App {
+.gallery {
   display: flex;
   flex-wrap: wrap;
 }
-.App a {
+.gallery a {
   width: 50%;
 }
 
-.App a img {
+.gallery a img {
   width: 100%;
 }

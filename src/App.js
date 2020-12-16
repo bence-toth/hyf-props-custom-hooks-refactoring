@@ -19,12 +19,14 @@ const App = () => {
       });
   }, []);
   return (
-    <div className="App">
-      {images.slice(0, imagesLimit).map((image) => (
-        <a href={`https://reddit.com/${image.link}`} key={image.link}>
-          <img src={image.imageUrl} alt="" />
-        </a>
-      ))}
+    <>
+      <div className="gallery">
+        {images.slice(0, imagesLimit).map((image) => (
+          <a href={`https://reddit.com/${image.link}`} key={image.link}>
+            <img src={image.imageUrl} alt="" />
+          </a>
+        ))}
+      </div>
       <button
         onClick={() => {
           setImagesLimit(imagesLimit + 2);
@@ -32,7 +34,7 @@ const App = () => {
       >
         Show me two more
       </button>
-    </div>
+    </>
   );
 };
 
