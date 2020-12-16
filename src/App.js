@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [images, setImages] = useState([]);
+  const [imagesLimit, setImagesLimit] = useState(2);
+  useEffect(() => {
+    fetch("https://www.reddit.com/r/perfectloops.json")
+      .then((response) => response.json())
+      .then((json) => {
+        setImages(
+          json.data.children
+            .map((child) => ({
+              link: child.data.permalink,
+              imageUrl: child.data.preview.images[0].variants?.gif?.source?.url,
+            }))
+            .filter((image) => image.imageUrl !== undefined)
+        );
+      });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+      {images.slice(0, imagesLimit).map((image) => (
+        <a href={`https://reddit.com/${image.link}`} key={image.link}>
+          <img src={image.imageUrl} alt="" />
         </a>
-      </header>
+      ))}
+      <button
+        onClick={() => {
+          setImagesLimit(imagesLimit + 2);
+        }}
+      >
+        Show me two more
+      </button>
     </div>
   );
-}
+};
 
 export default App;
