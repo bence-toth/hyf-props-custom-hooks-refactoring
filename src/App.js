@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { useImagesFromReddit, useImagesLimit } from "./App.hooks";
+import { getImagesToRender } from "./App.utility";
 
 import ShowMoreButton from "./components/ShowMoreButton/ShowMoreButton";
 import Gallery from "./components/Gallery/Gallery";
@@ -11,7 +12,10 @@ const App = () => {
 
   const { areImagesLoading, images } = useImagesFromReddit();
 
-  const imagesToRender = images.slice(0, imagesLimit);
+  const imagesToRender = getImagesToRender({
+    images,
+    limit: imagesLimit,
+  });
 
   return (
     <>
