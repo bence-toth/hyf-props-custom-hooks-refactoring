@@ -17,13 +17,17 @@ const App = () => {
     limit: imagesLimit,
   });
 
+  const areThereMoreImagesToShow = images.length > imagesLimit;
+
   return (
     <>
       {areImagesLoading ? <Loader /> : <Gallery images={imagesToRender} />}
-      <ShowMoreButton
-        onShowMore={showMoreImages}
-        isDisabled={areImagesLoading}
-      />
+      {areThereMoreImagesToShow && (
+        <ShowMoreButton
+          onShowMore={showMoreImages}
+          isDisabled={areImagesLoading}
+        />
+      )}
     </>
   );
 };
