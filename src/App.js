@@ -3,6 +3,7 @@ import "./App.css";
 
 import ShowMoreButton from "./components/ShowMoreButton/ShowMoreButton";
 import Gallery from "./components/Gallery/Gallery";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const [imagesLimit, setImagesLimit] = useState(2);
@@ -33,8 +34,7 @@ const App = () => {
 
   return (
     <>
-      {areImagesLoading && <p>Images are loading...</p>}
-      <Gallery images={imagesToRender} />
+      {areImagesLoading ? <Loader /> : <Gallery images={imagesToRender} />}
       <ShowMoreButton
         onShowMore={showMoreImages}
         isDisabled={areImagesLoading}
