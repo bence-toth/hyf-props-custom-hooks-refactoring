@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import ShowMoreButton from "./components/ShowMoreButton/ShowMoreButton";
+import Gallery from "./components/Gallery/Gallery";
 
 const App = () => {
   const [imagesLimit, setImagesLimit] = useState(2);
@@ -26,15 +27,11 @@ const App = () => {
       });
   }, []);
 
+  const imagesToRender = images.slice(0, imagesLimit);
+
   return (
     <>
-      <div className="gallery">
-        {images.slice(0, imagesLimit).map((image) => (
-          <a href={`https://reddit.com/${image.link}`} key={image.link}>
-            <img src={image.imageUrl} alt="" />
-          </a>
-        ))}
-      </div>
+      <Gallery images={imagesToRender} />
       <ShowMoreButton onShowMore={showMoreImages} />
     </>
   );

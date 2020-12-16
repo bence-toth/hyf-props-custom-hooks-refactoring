@@ -1,0 +1,11 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+.gallery a {
+  width: 50%;
+}
+
+.gallery a img {
+  width: 100%;
+}
