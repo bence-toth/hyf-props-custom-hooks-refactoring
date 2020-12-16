@@ -22,4 +22,13 @@ const useImagesFromReddit = () => {
   };
 };
 
-export { useImagesFromReddit };
+const useImagesLimit = () => {
+  const [imagesLimit, setImagesLimit] = useState(2);
+  const showMoreImages = () => {
+    setImagesLimit(imagesLimit + 2);
+  };
+
+  return { imagesLimit, showMoreImages };
+};
+
+export { useImagesFromReddit, useImagesLimit };
