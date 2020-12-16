@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+import ShowMoreButton from "./components/ShowMoreButton/ShowMoreButton";
+
 const App = () => {
-  const [images, setImages] = useState([]);
   const [imagesLimit, setImagesLimit] = useState(2);
+
+  const showMoreImages = () => {
+    setImagesLimit(imagesLimit + 2);
+  };
+
+  const [images, setImages] = useState([]);
   useEffect(() => {
     fetch("https://www.reddit.com/r/perfectloops.json")
       .then((response) => response.json())
@@ -18,6 +25,7 @@ const App = () => {
         );
       });
   }, []);
+
   return (
     <>
       <div className="gallery">
@@ -27,13 +35,7 @@ const App = () => {
           </a>
         ))}
       </div>
-      <button
-        onClick={() => {
-          setImagesLimit(imagesLimit + 2);
-        }}
-      >
-        Show me two more
-      </button>
+      <ShowMoreButton onShowMore={showMoreImages} />
     </>
   );
 };
