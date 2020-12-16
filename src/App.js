@@ -11,6 +11,7 @@ const App = () => {
     setImagesLimit(imagesLimit + 2);
   };
 
+  const [areImagesLoading, setAreImagesLoading] = useState(true);
   const [images, setImages] = useState([]);
   useEffect(() => {
     fetch("https://www.reddit.com/r/perfectloops.json")
@@ -24,6 +25,7 @@ const App = () => {
             }))
             .filter((image) => image.imageUrl !== undefined)
         );
+        setAreImagesLoading(false);
       });
   }, []);
 
@@ -31,8 +33,12 @@ const App = () => {
 
   return (
     <>
+      {areImagesLoading && <p>Images are loading...</p>}
       <Gallery images={imagesToRender} />
-      <ShowMoreButton onShowMore={showMoreImages} />
+      <ShowMoreButton
+        onShowMore={showMoreImages}
+        isDisabled={areImagesLoading}
+      />
     </>
   );
 };
